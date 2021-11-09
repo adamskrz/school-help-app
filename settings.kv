@@ -1,0 +1,71 @@
+<SettingsPage>
+    cols: 2
+    padding: dp(10)
+    spacing: dp(10)
+    
+    MDLabel:
+        text: 'Home Stop:'
+        size_hint_y: None
+        size: self.texture_size
+        size_hint_x: 0.4
+    
+    MDTextField:
+        id: home_stop
+        hint_text: 'ATCO code'
+        text: app.home_stop
+        size_hint_x: 0.6
+    
+    MDLabel:
+        text: 'School:'
+        size_hint_y: None
+        size: self.texture_size
+        size_hint_x: 0.4
+    
+    MDTextField:
+        id: school_stop
+        hint_text: 'ATCO code'
+        text: app.school_stop
+        size_hint_x: 0.6
+    
+    MDLabel:
+        text: 'Automatically archive tasks?'
+        size_hint_y: None
+        size: self.texture_size
+        size_hint_x: 0.4
+    
+    MDSwitch:
+        id: archive_switch
+        size_hint: None, None
+        size: dp(36), dp(48)
+        active: app.archive
+
+    MDRaisedButton:
+        text: 'View Home Times'
+        elevation_normal: 2
+        opposite_colors: True
+        size_hint: 1,1
+        on_release: root.set_home_times()
+    
+    MDRaisedButton:
+        text: 'View School Times'
+        elevation_normal: 2
+        opposite_colors: True
+        size_hint: 1,1
+        on_release: root.set_school_times()
+
+    MDRaisedButton:
+        text: 'Cancel'
+        elevation_normal: 2
+        opposite_colors: True
+        size_hint: 1,1
+        on_release: root.exit_settings()
+    
+    MDRaisedButton:
+        text: 'Save'
+        elevation_normal: 2
+        opposite_colors: True
+        size_hint: 1,1
+        on_release: root.save_settings()
+        
+    
+        

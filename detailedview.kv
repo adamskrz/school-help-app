@@ -1,0 +1,118 @@
+<DetailedViewPage>
+    id: detailed_view_page
+    orientation: 'vertical'
+    padding: dp(10)
+    spacing: dp(10)
+
+    MDLabel:
+        text: str('Task' + str(app.current_hwid))
+        font_style: 'H5'
+        size_hint_y: None
+        size: self.texture_size
+    
+    BoxLayout:
+        size_hint: 1, None
+        size: self.minimum_size
+        padding: dp(10), 0
+        spacing: 20
+        orientation: 'horizontal'
+        id: row_1
+        MDTextField:
+            hint_text: 'Task name'
+            mode: 'rectangle'
+            required: True
+            helper_text_mode: 'on_error'
+            id: task_name
+            disabled: True
+        MDDropDownItem:
+            id: task_type_dropdown
+            items: ['Homework', 'Worksheet', 'Quiz', 'Test', 'Project']
+            dropdown_bg: [1, 1, 1, 1]
+            disabled: True
+    
+    MDTextField:
+        hint_text: 'Subject'
+        id: task_subject
+        disabled: True
+    
+    MDTextField:
+        multiline: True
+        hint_text: 'Task Description'
+        helper_text: 'optional'
+        helper_text_mode: 'on_focus'
+        id: task_description
+        max_text_length: 500
+        disabled: True
+
+    GridLayout:
+        cols: 2
+        spacing: 10
+        
+        MDLabel:
+            text: 'Task completed?'
+            size_hint_y: None
+            size: self.texture_size
+            size_hint_x: 1
+        
+        MDSwitch:
+            id: task_done
+            size_hint: None, None
+            size: dp(36), dp(48)
+            disabled: True
+
+        MDLabel:
+            text: 'Date Set:'
+            font_style: 'Body1'
+            size_hint_y: 0.1
+            size: self.texture_size
+        
+        MDLabel:
+            text: 'Date Due:'
+            font_style: 'Body1'
+            size_hint_y: 0.1
+            size: self.texture_size
+
+        MDRaisedButton:
+            id: date_set
+            text: str(root.today)
+            size_hint: 1, 0.5
+            opposite_colors: True
+            on_release: root.show_date_set_picker()
+            disabled: True
+
+        MDRaisedButton:
+            id: date_due
+            text: str(root.today)
+            elevation_normal: 2
+            opposite_colors: True
+            size_hint: 1,0.5
+            on_release: root.show_date_due_picker()
+            disabled: True
+    
+    BoxLayout:
+        orientation:'horizontal'
+        spacing: 10
+        
+        MDRaisedButton:
+            id: cancel_button
+            text: "Close"
+            elevation_normal: 2
+            opposite_colors: True
+            size_hint: 1,1
+            on_release: root.exit_screen()
+        
+        MDRaisedButton:
+            id: delete_button
+            text: 'Delete'
+            elevation_normal: 2
+            opposite_colors: True
+            size_hint: 1,1
+            on_release: root.show_delete_dialog()
+
+        MDRaisedButton:
+            id: action_button
+            text: "Edit"
+            elevation_normal: 2
+            opposite_colors: True
+            size_hint: 1,1
+            on_release: root.action_callback()
