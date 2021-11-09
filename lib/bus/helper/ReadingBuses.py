@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 import requests
 from distutils import util
-import secrets
+from . import api_secrets
 
 def ReadingAPI(ATCOcode, apiKey):
     #Get departures for chosen stop
@@ -34,5 +34,5 @@ def ReadingAPI(ATCOcode, apiKey):
 
 if __name__ == "__main__":      #test data
     ATCO = "03700308"
-    print(ReadingAPI(ATCO, secrets.readingAPIkey))
+    print(ReadingAPI(ATCO, api_secrets.readingAPIkey))
 
