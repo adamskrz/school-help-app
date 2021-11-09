@@ -145,3 +145,4 @@ random_files/
 *.code-workspace
 *.exe
 *.json
+lib/bus/helper/api_secrets.py
