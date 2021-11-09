@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 import requests
 
-from secrets import TravelineID, TravelinePassword
+from . import api_secrets
 
 def TravelineAPI(ATCOcode, TravelineID, TravelinePassword):
     requestID = '0'
@@ -52,6 +52,6 @@ def TravelineAPI(ATCOcode, TravelineID, TravelinePassword):
 
 if __name__ == "__main__":      #test data
     ATCOcode = '03700308'
-    print(TravelineAPI(ATCOcode, TravelineID, TravelinePassword))
+    print(TravelineAPI(ATCOcode, api_secrets.TravelineID, api_secrets.TravelinePassword))
 
 

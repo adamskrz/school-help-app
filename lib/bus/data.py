@@ -1,7 +1,7 @@
 if __name__=='__main__':
-    from helper import traveline, ReadingBuses, TfL, secrets
+    from helper import traveline, ReadingBuses, TfL, api_secrets
 else:
-    from .helper import traveline, ReadingBuses, TfL, secrets
+    from .helper import traveline, ReadingBuses, TfL, api_secrets
 
 import pickle
 from datetime import timezone
@@ -26,7 +26,7 @@ def AllBusData(ATCOcode,debug = False):
         
 
         #request bus time data from
-        travelineData = traveline.TravelineAPI(ATCOcode, secrets.TravelineID, secrets.TravelinePassword)
+        travelineData = traveline.TravelineAPI(ATCOcode, api_secrets.TravelineID, api_secrets.TravelinePassword)
         
         # by default, program assumes there are no services by TfL or RDB
         readingFlag = False
@@ -67,7 +67,7 @@ def AllBusData(ATCOcode,debug = False):
 
         if readingFlag == True:
             #if a bus operated by RDB was detected, get their data as well
-            readingData = ReadingBuses.ReadingAPI(ATCOcode, secrets.readingAPIkey)
+            readingData = ReadingBuses.ReadingAPI(ATCOcode, api_secrets.readingAPIkey)
             for bus in readingData:
                 #iterate through RDB data as woth traveline data
                 updatedFlag = False
@@ -104,7 +104,7 @@ def AllBusData(ATCOcode,debug = False):
 
         if londonFlag == True:
             #if any london buses were found to operate at the stop, call the TfL API
-            londonData = TfL.TfLAPI(ATCOcode, secrets.TFLappID, secrets.TFLappKey)
+            londonData = TfL.TfLAPI(ATCOcode, api_secrets.TFLappID, api_secrets.TFLappKey)
             for bus in londonData:
                 #iterate through buses gained from TfL API
                 if bus['requestTime'] != None:

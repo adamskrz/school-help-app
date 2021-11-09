@@ -1,6 +1,6 @@
 import json
 import requests
-import secrets
+from . import api_secrets
 
 def TfLAPI(ATCOcode, appID, appKey):
     #create GET request for the selected stop
@@ -20,6 +20,6 @@ def TfLAPI(ATCOcode, appID, appKey):
 
 if __name__ == "__main__":      #test data
     ATCO = "03700308"
-    print(TfLAPI(ATCO, secrets.TfLappID, secrets.TfLappKey))
+    print(TfLAPI(ATCO, api_secrets.TfLappID, api_secrets.TfLappKey))
 
 
