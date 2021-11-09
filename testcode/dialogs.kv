@@ -1,0 +1,72 @@
+BoxLayout:
+    orientation: "vertical"
+    spacing: dp(5)
+
+    MDToolbar:
+        id: toolbar
+        title: app.title
+        left_action_items: [["menu", lambda x: None]]
+        elevation: 10
+        md_bg_color: app.theme_cls.primary_color
+
+    FloatLayout:
+        MDRectangleFlatButton:
+            text: "Open input dialog"
+            pos_hint: {"center_x": .5, "center_y": .7}
+            opposite_colors: True
+            on_release: app.show_example_input_dialog()
+
+        MDRectangleFlatButton:
+            text: "Open Ok Cancel dialog"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            opposite_colors: True
+            on_release: app.show_example_okcancel_dialog()
+
+
+<ContentHWInputDialog>
+    orientation: 'vertical'
+    padding: dp(15)
+    spacing: dp(10)
+
+    BoxLayout:
+        orientation: 'horizontal'
+        MDTextField:
+            hint_text: 'Task name'
+            mode: 'rectangle'
+            required: True
+            helper_text_mode: 'on_error'
+        
+        #dropdown
+    
+    MDTextField:
+        hint_text: 'Subject'
+    
+    MDTextField:
+        multiline: True
+        hint_text: 'Task Description'
+        helper_text: 'optional'
+        helper_text_mode: 'on_focus'
+
+    GridLayout:
+        cols: 2
+        MDRaisedButton:
+            text: "Issue Date"
+            elevation_normal: 2
+            opposite_colors: True
+        MDRaisedButton:
+            text: "Due Date"
+            elevation_normal: 2
+            opposite_colors: True
+    
+    GridLayout:
+        cols: 2
+        MDRaisedButton:
+            text: "Cancel"
+            elevation_normal: 2
+            opposite_colors: True
+        MDRaisedButton:
+            text: "Save"
+            elevation_normal: 2
+            opposite_colors: True
+
+    

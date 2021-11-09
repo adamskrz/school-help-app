@@ -1,0 +1,163 @@
+#:import ImageLeftWidget kivymd.uix.list.ImageLeftWidget
+#:import IconLeftWidget kivymd.uix.list.IconLeftWidget
+#:import IconLeftWidget kivymd.uix.list.IconLeftWidget
+#:import images_path kivymd.images_path
+#:import toast kivymd.toast.toast
+
+<DetailedBusItem>
+    theme_text_color: 'Custom'
+
+    ImageLeftWidget:
+        source: root.icon
+
+<ShortBusItem>
+    theme_text_color: 'Custom'
+
+    ImageLeftWidget:
+        source: root.icon
+
+<HomeworkGridItem>
+    size_hint_y: None
+    orientation: 'horizontal'
+    height: self.minimum_height
+    padding: dp(10)
+    spacing: dp(10)
+    MDLabel:
+        text: root.name
+        size_hint_y: None
+        height: dp(35)
+        size_hint_x: 0.6
+    MDLabel:
+        size_hint_y: None
+        text: root.subject
+        height: dp(35)
+        size_hint_x: 0.4
+    MDLabel:
+        size_hint_y: None
+        text: root.due
+        height: dp(35)
+        width: dp(80)
+        size_hint_x: None
+
+
+<HomeworkListItem>
+    on_release: app.homework_detailed_view(self.task_id)
+
+<ContentScroll>
+    pos_hint: {"top": 1}
+    size_hint: (1, 1)
+
+    GridLayout:
+        id: box_item
+        cols: 1
+        size_hint_y: None
+        height: self.minimum_height
+
+<ContentHwView>
+    orientation: 'vertical'                               
+    MDToolbar:
+        title: 'Homework'
+        md_bg_color: app.theme_cls.primary_color
+        right_action_items: [['plus', lambda x: app.changeScreen('new_task_screen')]]
+
+
+    MDTabs:
+        id: android_tabs
+        HomeworkTab:
+            text: 'Current Homework'
+            ContentScroll:
+                id: current_task_scroll
+        HomeworkTab:
+            orientation: 'vertical'
+            text: 'Archive Homework'
+            MDDropDownItem:
+                id: subject_dropdown
+                pos_hint: {"center_x": 0.5, "center_y": 0.6}
+                # dropdown_width_mult: 5
+                # size_hint: 0.6, None
+                padding: 15
+                items: app.sub_list
+                dropdown_bg: [1, 1, 1, 1]
+                on_select: app.refreshArchiveList()
+            ContentScroll:
+                id: subject_task_scroll
+
+
+ScreenManager:
+    id: scr_mngr
+
+
+    Screen:
+        name: 'main_app_screen'
+                            
+
+        MDBottomNavigation:
+            id: panel
+
+            MDBottomNavigationItem:
+                name: 'bus'
+                text: 'Bus Times'
+                icon: 'bus'
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    
+                    MDToolbar:
+                        id: toolbar
+                        title: app.bus_title
+                        md_bg_color: app.theme_cls.primary_color
+                        right_action_items: [['refresh', lambda x: app.refreshBusTimes()]]
+                        
+                    
+                    ContentScroll:
+                        id: bus_scroll
+                
+                
+
+            MDBottomNavigationItem:
+                id: home_tab
+                name: 'home'
+                text: 'Home'
+                icon: 'home-variant'
+
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar:
+                        id: toolbar
+                        title: 'School Help'
+                        md_bg_color: app.theme_cls.primary_color
+                        right_action_items: [['settings', lambda x: app.changeScreen('settings_screen')]]
+
+                    ContentScroll:
+                        id: short_bus
+                    
+                    ContentScroll:
+                        id: short_hw
+                    
+                
+                
+            MDBottomNavigationItem:
+                name: 'homework'
+                text: 'Homework'
+                icon: 'book-open-variant'
+
+                on_leave: app.bus_auto_refresh()
+
+                ContentHwView:
+                    id: homework_screen
+
+                BoxLayout:
+
+    Screen:
+        name: 'new_task_screen'
+        NewTaskPage:
+    
+    Screen:
+        name: 'settings_screen'
+        SettingsPage:
+    
+    Screen:
+        name: 'detailed_view_screen'
+        DetailedViewPage:
+            id: detailed_view
